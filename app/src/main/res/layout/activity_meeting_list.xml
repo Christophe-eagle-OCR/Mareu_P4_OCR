@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:contentDescription="@string/content_description_add"
+        android:contentDescription="@string/content_description_addMeeting"
         app:srcCompat="@drawable/ic_add_white_24dp"
         app:tint="@color/white"
         app:backgroundTint="@color/red"/>

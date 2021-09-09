@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Mareu</string>
+    <string name="app_name">Ma réu</string>
 
-    <string name="content_description_add">Ajouter</string>
+    <string name="content_description_addMeeting">Ajouter une réunion</string>
+    <string name="content_description_createMeeting">créer une réunion</string>
 
 
 </resources>
