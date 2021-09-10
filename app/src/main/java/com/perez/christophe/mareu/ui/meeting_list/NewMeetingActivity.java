@@ -53,18 +53,23 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         }
         if (date.isEmpty()) {
             binding.addMeetingDateTextField.setError("Merci de préciser la date de la réunion");
+            return;
         }
         if (starTime.isEmpty()) {
             binding.addMeetingStartTimeTextField.setError("Merci de préciser l'heure du début de la réunion");
+            return;
         }
         if (endTime.isEmpty()) {
             binding.addMeetingEndTimeTextField.setError("Merci de préciser l'heure de fin de la réunion");
+            return;
         }
         if (listOfParticipants.isEmpty()){
             binding.addMeetingListOfParticipantsTextField.setError("Merci de préciser les participants de la réunion");
+            return;
         }
         if (room.isEmpty()){
             binding.addMeetingRoomTextField.setError("Merci de préciser le nom de la salle de réunion");
+            return;
         }
 
 
