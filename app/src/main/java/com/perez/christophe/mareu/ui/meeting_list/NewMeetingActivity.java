@@ -86,7 +86,8 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         //todo : Pb du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",
         // actuellement pour la room elle sera créée avec son constructeur avec new Room et des paramettres en "dur"
-        // IL FAUDRA METTRE UN "SPINER" menu deroulant pour la liste des participants et la liste des rooms
+        // IL FAUDRA METTRE UN "SPINNER" menu deroulant  pour la liste des rooms
+        //pour la liste des participants : edit texte ou spinner  et 1 btn plus
         // POUR LA DATE , on peut faire un "DatePicker"
         // Pour l'heure , on peut faire un "TimePicker"
         //
