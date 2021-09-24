@@ -2,19 +2,26 @@ package com.perez.christophe.mareu.ui.meeting_list;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.databinding.ActivityNewMeetingBinding;
 import com.perez.christophe.mareu.di.DI;
 import com.perez.christophe.mareu.model.Meeting;
 import com.perez.christophe.mareu.model.Room;
 import com.perez.christophe.mareu.repository.MeetingRepository;
+import com.perez.christophe.mareu.repository.RoomGenerator;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     ActivityNewMeetingBinding binding;
 
@@ -28,6 +35,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         setCreateMeetingBtn();
         getSupportActionBar().setTitle("Nouvelle réunion");
         mMeetingRepository = DI.getMeetingRepository();
+        initSpinner();
     }
 
     private void setCreateMeetingBtn() {
@@ -90,13 +98,53 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         //pour la liste des participants : edit texte ou spinner  et 1 btn plus
         // POUR LA DATE , on peut faire un "DatePicker"
         // Pour l'heure , on peut faire un "TimePicker"
-        //
+
         //pour créer la reunion ( en passant par le di et le repo)
         mMeetingRepository.createMeeting(new Meeting(object,date,starTime,endTime,listOfParticipants,new Room(1,room,0xff81D4FA)));
         //mMeetingRepository.createMeeting(new Meeting(object,date,starTime,endTime,listOfParticipants,room));
         Toast.makeText(this, "Bravo , la réunion a été créée", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    private void initSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.add_meeting_spinner_list_of_rooms);
+
+        // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        R.array.list_of_meeting_rooms, android.R.layout.simple_spinner_item);
+
+        // todo : 1b- pour recuperer ma liste de salles dans la classe RoomsGenerator
+       // List<Room> roomList = new ArrayList<>(RoomGenerator.generateListOfRoons());
+       // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, roomList);
+
+        // 2- Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        // 3- To define the selection event handler for a spinner, implement the AdapterView.OnItemSelectedListener interface
+        // 4- Then you need to specify the interface implementation by calling
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    // 5- When the user selects an item from the drop-down,
+    // the Spinner object receives an on-item-selected event.(voir @Override methodes onItemSelected et OnNothingSelected)
+    @Override //5-1
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // An item was selected. You can retrieve the selected item using
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+
+        // Get text from selected item's position & set it to TextView
+        //String room = binding.addMeetingRoomTextField.getEditText().setText(parent.getItemAtPosition(position).toString());
+        //room.setText(parent.getItemAtPosition(position).toString());
+        Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());
 
 
+    }
+
+    @Override //5-2
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 }
