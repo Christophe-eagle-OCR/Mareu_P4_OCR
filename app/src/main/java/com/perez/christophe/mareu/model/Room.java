@@ -1,5 +1,7 @@
 package com.perez.christophe.mareu.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
@@ -48,5 +50,9 @@ public class Room  implements Serializable {
         mColorOfRoom = colorOfRoom;
     }
 
+    @Override
+    public String toString() {
+        return mNameOfRoom;
+    }
 }
 

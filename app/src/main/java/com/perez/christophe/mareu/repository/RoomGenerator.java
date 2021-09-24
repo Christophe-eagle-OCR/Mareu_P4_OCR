@@ -25,7 +25,7 @@ public abstract class RoomGenerator {
             new Room(10,"Salle 10",0xffFFAB91)
     );
 
-    static List<Room> generateListOfRoons(){
+    public static List<Room> generateListOfRoons(){
         return new ArrayList<>(ROOMS_LIST);
     }
 

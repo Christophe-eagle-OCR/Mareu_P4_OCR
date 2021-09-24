@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class MeetingRepositoryImpl implements MeetingRepository {
 
-    //todo
     // mettre liste des meeting depuis new meeting  ,
     // add remove,et get
     // creer liste le meeting

@@ -27,6 +27,8 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
 
     private MeetingRepository mMeetingRepository;
 
+    int position;
+
 
     private void initUI() {
         binding = ActivityNewMeetingBinding.inflate(getLayoutInflater());
@@ -93,15 +95,13 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
 
         //todo : Pb du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",
-        // actuellement pour la room elle sera créée avec son constructeur avec new Room et des paramettres en "dur"
-        // IL FAUDRA METTRE UN "SPINNER" menu deroulant  pour la liste des rooms
+        // fait UN "SPINNER" menu deroulant  pour la liste des rooms
         //pour la liste des participants : edit texte ou spinner  et 1 btn plus
         // POUR LA DATE , on peut faire un "DatePicker"
         // Pour l'heure , on peut faire un "TimePicker"
 
-        //pour créer la reunion ( en passant par le di et le repo)
-        mMeetingRepository.createMeeting(new Meeting(object,date,starTime,endTime,listOfParticipants,new Room(1,room,0xff81D4FA)));
-        //mMeetingRepository.createMeeting(new Meeting(object,date,starTime,endTime,listOfParticipants,room));
+        // Pour créer la reunion ( en recuperant dans RoomGenerator le nom de la salle et sa couleur associée suivant sa "position" choisie dans le spinner avec la methode onItemSelected)
+        mMeetingRepository.createMeeting(new Meeting(object, date, starTime, endTime, listOfParticipants, RoomGenerator.generateListOfRoons().get(position)));
         Toast.makeText(this, "Bravo , la réunion a été créée", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -110,12 +110,12 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         Spinner spinner = (Spinner) findViewById(R.id.add_meeting_spinner_list_of_rooms);
 
         // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        R.array.list_of_meeting_rooms, android.R.layout.simple_spinner_item);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        //R.array.list_of_meeting_rooms, android.R.layout.simple_spinner_item);
 
-        // todo : 1b- pour recuperer ma liste de salles dans la classe RoomsGenerator
-       // List<Room> roomList = new ArrayList<>(RoomGenerator.generateListOfRoons());
-       // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, roomList);
+        // 1b- pour recuperer ma liste de salles dans la class RoomsGenerator
+        List<Room> roomList = new ArrayList<>(RoomGenerator.generateListOfRoons());
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, roomList);
 
         // 2- Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,6 +139,8 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         //String room = binding.addMeetingRoomTextField.getEditText().setText(parent.getItemAtPosition(position).toString());
         //room.setText(parent.getItemAtPosition(position).toString());
         Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());
+
+        this.position = position;
 
 
     }
