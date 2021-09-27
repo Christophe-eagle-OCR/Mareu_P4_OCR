@@ -65,7 +65,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         String starTime = binding.addMeetingStartTimeTextField.getEditText().getText().toString();
         String endTime = binding.addMeetingEndTimeTextField.getEditText().getText().toString();
         String listOfParticipants = binding.addMeetingListOfParticipantsTextField.getEditText().getText().toString();
-        String room = binding.addMeetingRoomTextField.getEditText().getText().toString();
+        //String room = binding.addMeetingRoomTextField.getEditText().getText().toString();
 
 
         if (object.isEmpty()) {
@@ -88,10 +88,10 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
             binding.addMeetingListOfParticipantsTextField.setError("Merci de préciser les participants de la réunion");
             return;
         }
-        if (room.isEmpty()) {
-            binding.addMeetingRoomTextField.setError("Merci de préciser le nom de la salle de réunion");
-            return;
-        }
+       // if (room.isEmpty()) {
+       //     binding.addMeetingRoomTextField.setError("Merci de préciser le nom de la salle de réunion");
+       //     return;
+       // }
 
         //todo : Pb du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",
@@ -138,7 +138,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         // Get text from selected item's position & set it to TextView
         //String room = binding.addMeetingRoomTextField.getEditText().setText(parent.getItemAtPosition(position).toString());
         //room.setText(parent.getItemAtPosition(position).toString());
-        Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());
+        //Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());
 
         this.position = position;
 

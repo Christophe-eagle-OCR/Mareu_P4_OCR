@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Objet de la reunion"
+        android:hint="Objet de la réunion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Date de la reunion"
+        android:hint="Date de la réunion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_meeting_object_textField">
@@ -46,7 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Debut de la reunion à"
+        android:hint="Debut de la réunion à"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_meeting_date_textField">
@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Fin de la reunion à"
+        android:hint="Fin de la réunion à"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_meeting_startTime_textField">
@@ -80,7 +80,7 @@
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_margin="8dp"
-        android:hint="Liste des participants ( mails)"
+        android:hint="Liste des participants (mails)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_meeting_endTime_textField">
@@ -93,22 +93,20 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/add_meeting_Room_textField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="145dp"
+
+    <TextView
+        android:id="@+id/add_meeting_Room_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="Salle de reunion"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="@id/add_meeting_spinner_list_of_rooms"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_meeting_listOfParticipants_textField">
+        app:layout_constraintTop_toBottomOf="@id/add_meeting_listOfParticipants_textField"
+        android:text="Choix de la salle de réunion"
+        android:textSize="16dp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/activity_new_meeting_create_meeting_fab"
@@ -117,7 +115,7 @@
         android:layout_gravity="bottom|center"
         android:layout_margin="8dp"
         android:contentDescription="@string/content_description_createMeeting"
-        android:text="Céer la reunion"
+        android:text="Créer la reunion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,10 +126,10 @@
         android:id="@+id/add_meeting_spinner_list_of_rooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toEndOf="@+id/add_meeting_Room_textField"
+        app:layout_constraintStart_toEndOf="@id/add_meeting_Room_text"
         app:layout_constraintTop_toBottomOf="@+id/add_meeting_listOfParticipants_textField" />
 
 
