@@ -19,7 +19,6 @@ import com.perez.christophe.mareu.repository.RoomGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -34,14 +33,14 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         binding = ActivityNewMeetingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        setCreateMeetingBtn();
+        setButton();
         getSupportActionBar().setTitle("Nouvelle réunion");
         mMeetingRepository = DI.getMeetingRepository();
         initSpinner();
     }
 
-    private void setCreateMeetingBtn() {
-        binding.activityNewMeetingCreateMeetingFab.setOnClickListener(this);
+    private void setButton() {
+        binding.createMeetingFab.setOnClickListener(this);
     }
 
     @Override
@@ -53,39 +52,38 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == binding.activityNewMeetingCreateMeetingFab) {
+        if (view == binding.createMeetingFab) {
             onCreateMeeting();
         }
     }
 
     // Create a new meeting
     private void onCreateMeeting() {
-        String object = binding.addMeetingObjectTextField.getEditText().getText().toString();
-        String date = binding.addMeetingDateTextField.getEditText().getText().toString();
-        String starTime = binding.addMeetingStartTimeTextField.getEditText().getText().toString();
-        String endTime = binding.addMeetingEndTimeTextField.getEditText().getText().toString();
-        String listOfParticipants = binding.addMeetingListOfParticipantsTextField.getEditText().getText().toString();
-        //String room = binding.addMeetingRoomTextField.getEditText().getText().toString();
+        String object = binding.objectTextField.getEditText().getText().toString();
+        String date = binding.dateTextField.getEditText().getText().toString();
+        String starTime = binding.startTimeTextField.getEditText().getText().toString();
+        String endTime = binding.endTimeTextField.getEditText().getText().toString();
+        String listOfParticipants = binding.listOfParticipantsTextField.getEditText().getText().toString();
 
 
         if (object.isEmpty()) {
-            binding.addMeetingObjectTextField.setError("Merci de préciser l'objet de la réunion");
+            binding.objectTextField.setError("Merci de préciser l'objet de la réunion");
             return;
         }
         if (date.isEmpty()) {
-            binding.addMeetingDateTextField.setError("Merci de préciser la date de la réunion");
+            binding.dateTextField.setError("Merci de préciser la date de la réunion");
             return;
         }
         if (starTime.isEmpty()) {
-            binding.addMeetingStartTimeTextField.setError("Merci de préciser l'heure du début de la réunion");
+            binding.startTimeTextField.setError("Merci de préciser l'heure du début de la réunion");
             return;
         }
         if (endTime.isEmpty()) {
-            binding.addMeetingEndTimeTextField.setError("Merci de préciser l'heure de fin de la réunion");
+            binding.endTimeTextField.setError("Merci de préciser l'heure de fin de la réunion");
             return;
         }
         if (listOfParticipants.isEmpty()) {
-            binding.addMeetingListOfParticipantsTextField.setError("Merci de préciser les participants de la réunion");
+            binding.listOfParticipantsTextField.setError("Merci de préciser les participants de la réunion");
             return;
         }
 
@@ -103,7 +101,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.add_meeting_spinner_list_of_rooms);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_list_of_rooms);
 
         // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -131,7 +129,8 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
-        // Get text from selected item's position & set it to TextView
+        //Todo : supprimer les lignes ci-dessous
+        //Get text from selected item's position & set it to TextView
         //String room = binding.addMeetingRoomTextField.getEditText().setText(parent.getItemAtPosition(position).toString());
         //room.setText(parent.getItemAtPosition(position).toString());
         //Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());

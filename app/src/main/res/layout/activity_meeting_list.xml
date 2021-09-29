@@ -10,7 +10,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_meetings_add_meeting_fab"
+        android:id="@+id/add_meeting_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -21,7 +21,7 @@
         app:backgroundTint="@color/red"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_meeting_list_meeting_recyclerview"
+        android:id="@+id/list_meeting_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_meeting_list"/>

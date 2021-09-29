@@ -29,7 +29,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         binding = ActivityMeetingListBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        setAddMeetingBtn();
+        setButton();
         initData();
         initRecyclerView();
     }
@@ -40,14 +40,14 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.activityMeetingListMeetingRecyclerview.setLayoutManager(layoutManager);
+        binding.listMeetingRv.setLayoutManager(layoutManager);
 
         mMeetingAdapter = new MeetingRecyclerViewAdapter(mMeetingList, this);
-        binding.activityMeetingListMeetingRecyclerview.setAdapter(mMeetingAdapter);
+        binding.listMeetingRv.setAdapter(mMeetingAdapter);
     }
 
-    private void setAddMeetingBtn() {
-        binding.activityMeetingsAddMeetingFab.setOnClickListener(this);
+    private void setButton() {
+        binding.addMeetingFab.setOnClickListener(this);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(view.getContext(), NewMeetingActivity.class);
-        if (view == binding.activityMeetingsAddMeetingFab) {
+        if (view == binding.addMeetingFab) {
             startActivity(intent);
 
             Context context = getApplicationContext();
