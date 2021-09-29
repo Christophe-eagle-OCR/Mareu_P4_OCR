@@ -88,10 +88,6 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
             binding.addMeetingListOfParticipantsTextField.setError("Merci de préciser les participants de la réunion");
             return;
         }
-       // if (room.isEmpty()) {
-       //     binding.addMeetingRoomTextField.setError("Merci de préciser le nom de la salle de réunion");
-       //     return;
-       // }
 
         //todo : Pb du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",

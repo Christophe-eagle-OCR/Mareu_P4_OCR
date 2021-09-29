@@ -2,6 +2,7 @@ package com.perez.christophe.mareu.repository;
 
 import com.perez.christophe.mareu.model.Meeting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

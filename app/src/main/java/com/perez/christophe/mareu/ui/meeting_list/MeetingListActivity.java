@@ -14,14 +14,13 @@ import com.perez.christophe.mareu.di.DI;
 import com.perez.christophe.mareu.model.Meeting;
 import com.perez.christophe.mareu.repository.MeetingRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
-public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener {
+public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, MeetingRecyclerViewAdapter.DeleteItemListener {
 
 
     private ActivityMeetingListBinding binding;
-    private final ArrayList<Meeting> mMeetingArrayList = new ArrayList<>();
+    private List<Meeting> mMeetingList;
     private final MeetingRepository mMeetingRepository = DI.getMeetingRepository();
     private MeetingRecyclerViewAdapter mMeetingAdapter;
 
@@ -31,23 +30,20 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         View view = binding.getRoot();
         setContentView(view);
         setAddMeetingBtn();
-        initRecyclerView();
         initData();
+        initRecyclerView();
+    }
+
+    private void initData() {
+        mMeetingList = mMeetingRepository.getMeetings();
     }
 
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.activityMeetingListMeetingRecyclerview.setLayoutManager(layoutManager);
 
-        mMeetingAdapter = new MeetingRecyclerViewAdapter(mMeetingArrayList);
+        mMeetingAdapter = new MeetingRecyclerViewAdapter(mMeetingList, this);
         binding.activityMeetingListMeetingRecyclerview.setAdapter(mMeetingAdapter);
-    }
-
-    private void initData() {
-        mMeetingArrayList.clear();
-        mMeetingArrayList.addAll(mMeetingRepository.getMeetings());
-        mMeetingAdapter.notifyDataSetChanged();
-
     }
 
     private void setAddMeetingBtn() {
@@ -60,7 +56,6 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         initUI();
     }
 
-
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(view.getContext(), NewMeetingActivity.class);
@@ -70,12 +65,18 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
             Context context = getApplicationContext();
             Toast.makeText(context, "Pour ajouter une reunion", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    @Override
+    public void onDeleteItem(int position, Meeting meeting) {
+        mMeetingRepository.deleteMeeting(meeting);
+        mMeetingAdapter.notifyItemRemoved(position);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        initData();
+        mMeetingAdapter.notifyDataSetChanged();
     }
+
 }

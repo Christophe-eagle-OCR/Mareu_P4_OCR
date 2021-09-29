@@ -1,11 +1,13 @@
 package com.perez.christophe.mareu.ui.meeting_list;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.model.Meeting;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Christophe on 03/09/2021.
@@ -21,10 +24,19 @@ import java.util.ArrayList;
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
 
 
-    private final ArrayList<Meeting> mMeetings;
+    private final List<Meeting> mMeetings;
 
-    public MeetingRecyclerViewAdapter(ArrayList<Meeting> meetings) {
-        this.mMeetings = meetings;
+    private final DeleteItemListener callback;
+
+    public MeetingRecyclerViewAdapter(List<Meeting> meetings, DeleteItemListener deleteItemListener) {
+        mMeetings = meetings;
+        callback = deleteItemListener;
+    }
+
+
+    // Interface for callback to delete item
+    public interface DeleteItemListener{
+        void onDeleteItem(int position,Meeting meeting);
     }
 
 
@@ -43,6 +55,17 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     public void onBindViewHolder(ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
         holder.displayMeeting(meeting);
+
+        // on click , delete item ( callback.onDeleteItem)
+        holder.mDeleteRoonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.onDeleteItem(holder.getAdapterPosition(), meeting);
+
+                Context context = v.getContext();
+                Toast.makeText(context, "La réunion a été supprimée", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -79,13 +102,12 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         public void displayMeeting(Meeting meeting) {
             // mettre ce que l'on affiche dans l'item , puis setText et get..
 
-            mObjectOfMeeting.setText(meeting.getObject()+" - ");
-            mStartTimeMeeting.setText(meeting.getStartTime()+"-"+meeting.getEndTime()+" - ");
+            mObjectOfMeeting.setText(meeting.getObject()+"   -");
+            mStartTimeMeeting.setText(meeting.getStartTime()+"-"+meeting.getEndTime()+"   -");
             mRoom.setText( meeting.getRoom().getNameOfRoom());
             mParticipants.setText(meeting.getParticipants());
             mPictureOfRoon.setColorFilter(meeting.getRoom().getColorOfRoom());
             mDeleteRoonButton.setVisibility(View.VISIBLE);
-
         }
     }
 }
