@@ -107,7 +107,7 @@ public class NewMeetingActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void initSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_list_of_rooms);
+        Spinner spinner = findViewById(R.id.spinner_list_of_rooms);
 
         // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
