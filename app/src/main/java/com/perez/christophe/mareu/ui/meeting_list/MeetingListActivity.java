@@ -67,6 +67,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    // For delete itemn meeting on display
     @Override
     public void onDeleteItem(int position, Meeting meeting) {
         mMeetingRepository.deleteMeeting(meeting);

@@ -1,13 +1,16 @@
 package com.perez.christophe.mareu.ui.meeting_list;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.databinding.ActivityNewMeetingBinding;
@@ -17,10 +20,12 @@ import com.perez.christophe.mareu.model.Room;
 import com.perez.christophe.mareu.repository.MeetingRepository;
 import com.perez.christophe.mareu.repository.RoomGenerator;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class NewMeetingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class NewMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     ActivityNewMeetingBinding binding;
 
@@ -37,6 +42,7 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setTitle("Nouvelle réunion");
         mMeetingRepository = DI.getMeetingRepository();
         initSpinner();
+        initDatePicker();
     }
 
     private void setButton() {
@@ -136,12 +142,35 @@ public class NewMeetingActivity extends AppCompatActivity implements View.OnClic
         //Objects.requireNonNull(binding.addMeetingRoomTextField.getEditText()).setText(parent.getItemAtPosition(position).toString());
 
         this.position = position;
-
-
     }
 
     @Override //5-2
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
+        // Another interface callback spinner
+    }
+
+    // DatePicker
+    private void initDatePicker() {
+        binding.selectDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+    }
+
+    // For DatePicker,
+    // Use onDateSet (Callback/rappel) to send the date in this activity and show it here.
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        //binding.dateText.setText(currentDateString);
+        binding.date2TextField.setText(currentDateString);
     }
 }

@@ -19,58 +19,66 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/date_text_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Date de la réunion"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/object_text_field">
+        app:layout_constraintTop_toBottomOf="@id/object_text_field"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:clickable="false">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/date2_text_field"
             android:layout_width="match_parent"
-            android:layout_height="61dp" />
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:inputType="datetime" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/start_time_text_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Debut de la réunion à"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_text_field">
+        app:layout_constraintTop_toBottomOf="@id/date_text_field"
+        app:startIconDrawable="@drawable/ic_time_24">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="datetime"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/end_time_text_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Fin de la réunion à"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_time_text_field">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="datetime"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +86,7 @@
         android:id="@+id/list_of_participants_text_field"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_margin="8dp"
         android:hint="Liste des participants (mails)"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +103,7 @@
 
 
     <TextView
-        android:id="@+id/add_meeting_Room_text"
+        android:id="@+id/choise_Room_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -107,6 +115,38 @@
         android:text="Choix de la salle de réunion"
         android:textSize="16dp"/>
 
+    <!--
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="@id/spinner_list_of_rooms"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/choise_Room_text"
+        android:text="Date de la reuinion"
+        android:textSize="16dp"/> -->
+
+
+    <Button
+        android:id="@+id/select_date_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/light_blue_200"
+        android:text="select date"
+        android:src="@drawable/ic_delete_black_24"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintTop_toBottomOf="@id/object_text_field">
+
+    </Button>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/create_meeting_fab"
@@ -129,8 +169,21 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toEndOf="@id/add_meeting_Room_text"
+        app:layout_constraintStart_toEndOf="@id/choise_Room_text"
         app:layout_constraintTop_toBottomOf="@+id/list_of_participants_text_field" />
+
+    <ImageButton
+        android:id="@+id/time_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="48dp"
+        android:background="@null"
+        android:src="@drawable/ic_time_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/start_time_text_field"
+        app:layout_constraintTop_toBottomOf="@+id/date_text_field" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
