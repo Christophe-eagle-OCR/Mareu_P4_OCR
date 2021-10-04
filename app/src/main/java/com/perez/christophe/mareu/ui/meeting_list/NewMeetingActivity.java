@@ -1,12 +1,14 @@
 package com.perez.christophe.mareu.ui.meeting_list;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +26,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
-public class NewMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class NewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     ActivityNewMeetingBinding binding;
 
@@ -43,6 +46,7 @@ public class NewMeetingActivity extends AppCompatActivity implements DatePickerD
         mMeetingRepository = DI.getMeetingRepository();
         initSpinner();
         initDatePicker();
+        initTimePicker();
     }
 
     private void setButton() {
@@ -96,9 +100,11 @@ public class NewMeetingActivity extends AppCompatActivity implements DatePickerD
         //todo : Pb du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",
         // fait UN "SPINNER" menu deroulant  pour la liste des rooms
-        //pour la liste des participants : edit texte ou spinner  et 1 btn plus
-        // POUR LA DATE , on peut faire un "DatePicker"
-        // Pour l'heure , on peut faire un "TimePicker"
+        // fait : POUR LA DATE , on peut faire un "DatePicker"
+        // fait : Pour l'heure , on peut faire un "TimePicker"
+        //pour la durée de la reunion : faire un spinner ou un TimePicker ?
+        //pour la liste des participants : edit texte ou spinner et 1 btn plus, ou chips ?
+
 
         // Pour créer la reunion ( en recuperant dans RoomGenerator le nom de la salle et sa couleur associée suivant sa "position" choisie dans le spinner avec la methode onItemSelected)
         mMeetingRepository.createMeeting(new Meeting(object, date, starTime, endTime, listOfParticipants, RoomGenerator.generateListOfRoons().get(position)));
@@ -172,5 +178,24 @@ public class NewMeetingActivity extends AppCompatActivity implements DatePickerD
 
         //binding.dateText.setText(currentDateString);
         binding.date2TextField.setText(currentDateString);
+    }
+
+    // TimePicker
+    private void initTimePicker() {
+        binding.selectTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+            }
+        });
+    }
+
+    // For TimePicker,
+    // Use onTimeteSet (Callback/rappel) to send the time in this activity and show it here.
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        //binding.startTime2TextField.setText(hourOfDay + "h" + minute);
+        binding.startTime2TextField.setText(String.format("%02dh%02d",hourOfDay,minute));
     }
 }

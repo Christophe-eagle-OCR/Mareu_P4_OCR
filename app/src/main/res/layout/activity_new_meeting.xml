@@ -60,9 +60,10 @@
         android:clickable="false">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/start_time2_text_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
+            android:focusableInTouchMode="false"
             android:inputType="datetime"/>
 
     </com.google.android.material.textfield.TextInputLayout>

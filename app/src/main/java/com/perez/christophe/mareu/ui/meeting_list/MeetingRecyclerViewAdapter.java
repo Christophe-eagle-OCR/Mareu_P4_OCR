@@ -103,7 +103,8 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             // mettre ce que l'on affiche dans l'item , puis setText et get..
 
             mObjectOfMeeting.setText(meeting.getObject()+"   -");
-            mStartTimeMeeting.setText(meeting.getStartTime()+"-"+meeting.getEndTime()+"   -");
+            mStartTimeMeeting.setText(meeting.getStartTime()+"   -");
+            //mStartTimeMeeting.setText(meeting.getStartTime()+"-"+meeting.getEndTime()+"   -");
             mRoom.setText( meeting.getRoom().getNameOfRoom());
             mParticipants.setText(meeting.getParticipants());
             mPictureOfRoon.setColorFilter(meeting.getRoom().getColorOfRoom());
