@@ -70,21 +70,23 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/end_time_text_field"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="230dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Fin de la réunion à"
+        android:hint="Durée de la réunion"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_time_text_field"
         android:focusableInTouchMode="false"
         android:focusable="false"
         android:clickable="false">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/end_time2_text_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
+            android:focusableInTouchMode="false"
             android:inputType="datetime"/>
 
     </com.google.android.material.textfield.TextInputLayout>

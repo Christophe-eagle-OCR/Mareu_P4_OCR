@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- For Spinner - list of meeting durations-->
+    <string-array name="meeting_duration_array">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>45 minutes</item>
+        <item>1 heure</item>
+        <item>1 heure et 15 minutes</item>
+        <item>1 heure et 30 minutes</item>
+    </string-array>
+
+</resources>

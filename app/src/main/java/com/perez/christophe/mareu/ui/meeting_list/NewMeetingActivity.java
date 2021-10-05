@@ -26,7 +26,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class NewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -44,9 +43,10 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
         setButton();
         getSupportActionBar().setTitle("Nouvelle réunion");
         mMeetingRepository = DI.getMeetingRepository();
-        initSpinner();
+        initSpinnerRooms();
         initDatePicker();
         initTimePicker();
+        initSpinnerDuration();
     }
 
     private void setButton() {
@@ -112,20 +112,21 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
         finish();
     }
 
-    private void initSpinner() {
+    // Spinner : List of rooms ( to RoomGenerator )
+    private void initSpinnerRooms() {
         Spinner spinner = findViewById(R.id.spinner_list_of_rooms);
 
         // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         //R.array.list_of_meeting_rooms, android.R.layout.simple_spinner_item);
 
-        // 1b- pour recuperer ma liste de salles dans la class RoomsGenerator
+        // 1b- Create an ArrayAdapter pour recuperer ma liste de salles de la class RoomsGenerator
         List<Room> roomList = new ArrayList<>(RoomGenerator.generateListOfRoons());
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, roomList);
 
         // 2- Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        // Apply the adapter to the spinner. Setting the ArrayAdapter data on the Spinner
         spinner.setAdapter(adapter);
 
         // 3- To define the selection event handler for a spinner, implement the AdapterView.OnItemSelectedListener interface
@@ -196,6 +197,34 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         //binding.startTime2TextField.setText(hourOfDay + "h" + minute);
-        binding.startTime2TextField.setText(String.format("%02dh%02d",hourOfDay,minute));
+        binding.startTime2TextField.setText(String.format("%02dh%02d", hourOfDay, minute));
+    }
+
+    // Spinner : List of meeting durations ( list in resources_values )
+    private void initSpinnerDuration() {
+
+        // 1a- Create an ArrayAdapter using the string array (in resources Strings) and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.meeting_duration_array, android.R.layout.simple_spinner_item);
+
+        // 2- Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner . Setting the ArrayAdapter data on the Spinner
+        binding.endTime2TextField.setAdapter(adapter);
+
+        //spinner item click handler
+        binding.endTime2TextField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // An item was selected. You can retrieve the selected item using
+                String text = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
