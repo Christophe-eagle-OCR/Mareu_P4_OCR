@@ -102,7 +102,7 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
         // fait UN "SPINNER" menu deroulant  pour la liste des rooms
         // fait : POUR LA DATE , on peut faire un "DatePicker"
         // fait : Pour l'heure , on peut faire un "TimePicker"
-        //pour la durée de la reunion : faire un spinner ou un TimePicker ?
+        // fait : pour la durée de la reunion , fait un spinner (on peut faire aussi un TimePicker )
         //pour la liste des participants : edit texte ou spinner et 1 btn plus, ou chips ?
 
 
