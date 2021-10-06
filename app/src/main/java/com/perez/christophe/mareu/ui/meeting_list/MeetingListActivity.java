@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.perez.christophe.mareu.databinding.ActivityMeetingListBinding;
@@ -43,6 +44,11 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         binding.listMeetingRv.setLayoutManager(layoutManager);
 
         mMeetingAdapter = new MeetingRecyclerViewAdapter(mMeetingList, this);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.listMeetingRv.getContext(),
+                layoutManager.getOrientation());
+        binding.listMeetingRv.addItemDecoration(dividerItemDecoration);
+
         binding.listMeetingRv.setAdapter(mMeetingAdapter);
     }
 
