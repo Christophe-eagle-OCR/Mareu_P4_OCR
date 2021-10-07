@@ -1,20 +1,30 @@
 package com.perez.christophe.mareu.ui.meeting_list;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.databinding.ActivityMeetingListBinding;
 import com.perez.christophe.mareu.di.DI;
 import com.perez.christophe.mareu.model.Meeting;
 import com.perez.christophe.mareu.repository.MeetingRepository;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener, MeetingRecyclerViewAdapter.DeleteItemListener {
@@ -84,6 +94,21 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     protected void onResume() {
         super.onResume();
         mMeetingAdapter.notifyDataSetChanged();
+    }
+
+    // for display Filter menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    //for generate handle click item filter menu selection
+    //todo implementation onOptionItemSelected
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
 }
