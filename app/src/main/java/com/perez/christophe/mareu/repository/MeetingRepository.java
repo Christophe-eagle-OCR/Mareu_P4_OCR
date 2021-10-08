@@ -3,6 +3,7 @@ package com.perez.christophe.mareu.repository;
 import com.perez.christophe.mareu.model.Meeting;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,4 +33,11 @@ public interface MeetingRepository {
      */
     void createMeeting(Meeting meeting);
 
+
+    /**
+     * Get Meetings filtered by date
+     * @param string
+     * @return
+     */
+    List<Meeting> getMeetingFilteredByDate(String string);
 }

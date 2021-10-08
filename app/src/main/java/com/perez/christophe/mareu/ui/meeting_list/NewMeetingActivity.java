@@ -23,6 +23,7 @@ import com.perez.christophe.mareu.repository.MeetingRepository;
 import com.perez.christophe.mareu.repository.RoomGenerator;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -175,9 +176,11 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        //String currentDateString = simpleDateFormat.format(c.getTime());
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
-        //binding.dateText.setText(currentDateString);
         binding.date2TextField.setText(currentDateString);
     }
 
@@ -219,6 +222,7 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
                 // An item was selected. You can retrieve the selected item using
                 String text = parent.getItemAtPosition(position).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+                //todo : le Toast ne s'affiche pas , pourquoi ?
             }
 
             @Override
