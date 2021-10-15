@@ -40,4 +40,7 @@ public interface MeetingRepository {
      * @return
      */
     List<Meeting> getMeetingFilteredByDate(String string);
+
+    List<Meeting> getMeetingFilteredByRoom(String string);
+
 }

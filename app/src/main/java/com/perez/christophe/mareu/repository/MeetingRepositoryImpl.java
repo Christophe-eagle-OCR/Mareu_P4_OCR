@@ -48,4 +48,19 @@ public class MeetingRepositoryImpl implements MeetingRepository {
         return filteredMeetingByDateList;
     }
 
+
+    // Pour fitrer par salle de reunion : on compare 2 salle de type String
+    @Override
+    public List<Meeting> getMeetingFilteredByRoom(String filteredByRoom) {
+        List<Meeting> filteredMeetingByRoomList = new ArrayList<>();
+
+        for (int i = 0; i < mMeetings.size();i =i +1){
+            Meeting currentMeeting =mMeetings.get(i);
+            if (currentMeeting.getRoom().getNameOfRoom().equals(filteredByRoom)){
+                filteredMeetingByRoomList.add(currentMeeting);
+            }
+        }
+        return filteredMeetingByRoomList;
+    }
+
 }

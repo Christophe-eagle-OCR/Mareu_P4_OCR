@@ -34,7 +34,7 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
 
     private MeetingRepository mMeetingRepository;
 
-    int position;
+    private int position;
 
 
     private void initUI() {

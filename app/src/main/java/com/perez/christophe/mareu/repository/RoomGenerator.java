@@ -25,8 +25,32 @@ public abstract class RoomGenerator {
             new Room(10,"Salle 10",0xffFFAB91)
     );
 
-    public static List<Room> generateListOfRoons(){
+    public static List<Room> generateListOfRoons() {
         return new ArrayList<>(ROOMS_LIST);
     }
 
+    public static List<String> ROOMS_LIST_STRING = Arrays.asList(
+            "Salle 1",
+            "Salle 2",
+            "Salle 3",
+            "Salle 4",
+            "Salle 5",
+            "Salle 6",
+            "Salle 7",
+            "Salle 8",
+            "Salle 9",
+            "Salle 10");
+
+    public static String[] ROOMS_LIST_STRING_TABLEAU = {
+            "Salle 1",
+            "Salle 2",
+            "Salle 3",
+            "Salle 4",
+            "Salle 5",
+            "Salle 6",
+            "Salle 7",
+            "Salle 8",
+            "Salle 9",
+            "Salle 10"
+    };
 }
