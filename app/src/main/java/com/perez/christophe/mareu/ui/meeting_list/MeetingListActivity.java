@@ -165,19 +165,22 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         //builder.setSingleChoiceItems(roomListItem, checkedItem, null);
         //builder.setSingleChoiceItems(new String[]{String.valueOf(roomListItem)}, checkedItem, null);
 
+        // Single_choise items (initialized with checked item)
         builder.setSingleChoiceItems(roomListItem, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 checkedItem = which;
 
-                //todo : Pb : la salle ne s'ajoute pas a cette liste ????
-                filterRoomString.add(roomListItem[which]);
-                int i=0;
+                // To add room choise in ArrayList
+                filterRoomString.add(roomListItem[checkedItem]);
             }
         });
 
-        builder.setNeutralButton("annuler", (dialog, which) -> {
-            Toast.makeText(getApplicationContext(), "Annulé", Toast.LENGTH_SHORT).show();
+        builder.setNeutralButton("annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MeetingListActivity.this.getApplicationContext(), "Annulé", Toast.LENGTH_SHORT).show();
+            }
         });
 
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -191,6 +194,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
                 binding.listMeetingRv.getAdapter().notifyDataSetChanged();
 
                 Toast.makeText(getApplicationContext(), "OK : "+ roomListItem[checkedItem], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "OK  "+ filterRoomString.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
