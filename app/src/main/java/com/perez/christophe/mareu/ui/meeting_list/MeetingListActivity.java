@@ -2,6 +2,7 @@ package com.perez.christophe.mareu.ui.meeting_list;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,14 +18,15 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.databinding.ActivityMeetingListBinding;
 import com.perez.christophe.mareu.di.DI;
 import com.perez.christophe.mareu.model.Meeting;
 import com.perez.christophe.mareu.repository.MeetingRepository;
+import com.perez.christophe.mareu.repository.RoomGenerator;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -91,6 +93,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     @Override
     public void onDeleteItem(int position, Meeting meeting) {
         mMeetingRepository.deleteMeeting(meeting);
+        initData();
         mMeetingAdapter.notifyItemRemoved(position);
     }
 
