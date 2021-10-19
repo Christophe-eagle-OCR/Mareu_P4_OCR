@@ -4,9 +4,7 @@ import com.perez.christophe.mareu.model.Room;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Christophe on 03/09/2021.
@@ -31,18 +29,6 @@ public abstract class RoomGenerator {
         return new ArrayList<>(ROOMS_LIST);
     }
 
-    // Generate list String of room in a ArrayList
-    public static List<String> ROOMS_LIST_STRING = Arrays.asList(
-            "Salle 1",
-            "Salle 2",
-            "Salle 3",
-            "Salle 4",
-            "Salle 5",
-            "Salle 6",
-            "Salle 7",
-            "Salle 8",
-            "Salle 9",
-            "Salle 10");
 
     // Generate list String [] of room in a board
     public static String[] ROOMS_LIST_STRING_TABLEAU = {
@@ -58,23 +44,4 @@ public abstract class RoomGenerator {
             "Salle 10"
     };
 
-    // Generate list String [] of room witch ROOM_LIST
-    public static String[] generateListStringRoom() {
-        String[] roomListStringTab = new String[ROOMS_LIST.size()];
-        for (int i = 0; i < ROOMS_LIST.size(); i = i + 1) {
-            String nameOfRoom = ROOMS_LIST.get(i).getNameOfRoom();
-            roomListStringTab[i] = nameOfRoom;
-        }
-        return roomListStringTab;
-    }
-
-    // Generate HashMap <nameOfRoom , colorOfRoom> witch ROOM_LIST
-    public static Map<String, Integer> generateHashMapRoom() {
-        Map<String, Integer> roomHashMap = new LinkedHashMap<>();
-        for (int i = 0; i < ROOMS_LIST.size(); i = i + 1) {
-            Room room = ROOMS_LIST.get(i);
-            roomHashMap.put(room.getNameOfRoom(), room.getColorOfRoom());
-        }
-        return roomHashMap;
-    }
 }

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,View.OnClickListener, MeetingRecyclerViewAdapter.DeleteItemListener {
+public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener, MeetingRecyclerViewAdapter.DeleteItemListener {
 
 
     private ActivityMeetingListBinding binding;
@@ -40,9 +40,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     private MeetingRecyclerViewAdapter mMeetingAdapter;
 
     private String[] roomListItem;
-    //ok3 private List<String> roomListItem;
-    //private int checkedItem;
     private int checkedItem = -1;
+
 
     private void initUI() {
 
@@ -109,7 +108,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         mMeetingAdapter.notifyDataSetChanged();
     }
 
-    // for display Filter menu
+    // For display Filter menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -117,7 +116,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         return true;
     }
 
-    //for generate handle click item filter menu selection
+    // For generate handle click item filter menu selection
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -141,33 +140,15 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.listMeetingRv.getAdapter().notifyDataSetChanged();
     }
 
-    // Filter by room with a list of room to type String []
+    // Filter by room with a list of room to type String [] roomListItem
     private void roomDialog() {
         List<String> filterRoomString = new ArrayList<>();
 
-        //ok5 roomListItem = RoomGenerator.generateHashMapRoom().keySet().toArray(new String[0]); // sequential with LinkedHashMap
-        //ok4 roomListItem = RoomGenerator.generateListStringRoom();     // sequential with String[] board witch ROOM_LIST
         roomListItem = RoomGenerator.ROOMS_LIST_STRING_TABLEAU;    // sequential with String[] board
-        //ok3 roomListItem = RoomGenerator.ROOMS_LIST_STRING;            // sequential with list String of room in a ArrayList
-        //ok2 CharSequence[] roomListItem = {"Salle 1", "Salle 2","Salle 3","Salle 4","Salle 5","Salle 6","Salle 7","Salle 8","Salle 9","Salle 10"};
-        //ok1 String [] roomListItem = getResources().getStringArray(R.array.list_of_meeting_rooms);
-
-        //ok String roomListItem = RoomGenerator.generateListOfRoons().get(0).getNameOfRoom();
-        //ok String roomListItem = RoomGenerator.generateListOfRoons().get(1).getNameOfRoom();
-
-        //String[] roomListItem = new String[]{String.valueOf(RoomGenerator.generateListOfRoons())};
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("choisir la salle de réunion");
 
-        //ok3   builder.setSingleChoiceItems((CharSequence[]) roomListItem.toArray(), checkedItem, (dialog, which) -> {
-        //       checkedItem =which;
-        //   });
-
-        //builder.setSingleChoiceItems(roomListItem, checkedItem, null);
-        //builder.setSingleChoiceItems(new String[]{String.valueOf(roomListItem)}, checkedItem, null);
-
-        // Single_choise items (initialized with checked item)
         builder.setSingleChoiceItems(roomListItem, checkedItem, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -188,14 +169,12 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //ok Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT).show();
-                //ok2 Toast.makeText(getApplicationContext(), "OK : "+ roomListItem.get(checkedItem), Toast.LENGTH_SHORT).show();
 
                 mMeetingList.clear();
                 mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByRoom(roomListItem[checkedItem]));
                 binding.listMeetingRv.getAdapter().notifyDataSetChanged();
 
-                Toast.makeText(getApplicationContext(), "OK : "+ roomListItem[checkedItem], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "OK : " + roomListItem[checkedItem], Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), "OK  "+ filterRoomString.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -204,13 +183,13 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     }
 
 
-    // DatePicker for filter date
+    // Filter date  with DatePicker
     private void dateDialog() {
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker filter");
     }
 
-    // For DatePicker - filter date,
+    // Filter date for DatePicker
     // Use onDateSet (Callback/rappel) to send the date to methode getMeetingFilteredByDate (qui filtre en fonction de la date) and show it here.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -224,7 +203,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         String filterDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
         mMeetingList.clear();
-       // mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByDate(c.getTime()));
+        // mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByDate(c.getTime()));
         mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByDate(filterDateString));
         binding.listMeetingRv.getAdapter().notifyDataSetChanged();
     }
