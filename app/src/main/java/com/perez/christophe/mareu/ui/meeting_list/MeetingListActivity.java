@@ -141,12 +141,14 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.listMeetingRv.getAdapter().notifyDataSetChanged();
     }
 
-    //todo implementation roomDialog for filter by room
+    // Filter by room with a list of room to type String []
     private void roomDialog() {
         List<String> filterRoomString = new ArrayList<>();
 
-        roomListItem = RoomGenerator.ROOMS_LIST_STRING_TABLEAU;
-        //ok3 roomListItem = RoomGenerator.ROOMS_LIST_STRING;
+        //ok5 roomListItem = RoomGenerator.generateHashMapRoom().keySet().toArray(new String[0]); // sequential with LinkedHashMap
+        //ok4 roomListItem = RoomGenerator.generateListStringRoom();     // sequential with String[] board witch ROOM_LIST
+        roomListItem = RoomGenerator.ROOMS_LIST_STRING_TABLEAU;    // sequential with String[] board
+        //ok3 roomListItem = RoomGenerator.ROOMS_LIST_STRING;            // sequential with list String of room in a ArrayList
         //ok2 CharSequence[] roomListItem = {"Salle 1", "Salle 2","Salle 3","Salle 4","Salle 5","Salle 6","Salle 7","Salle 8","Salle 9","Salle 10"};
         //ok1 String [] roomListItem = getResources().getStringArray(R.array.list_of_meeting_rooms);
 
@@ -198,15 +200,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
             }
         });
 
-
-        //   builder.setPositiveButton("ok", (dialog, which) -> {
-        //       Toast.makeText(getApplicationContext(), "ok : "+ roomListItem[checkedItem], Toast.LENGTH_SHORT).show();
-//
-        //   });
-
-
         builder.show();
-
     }
 
 
