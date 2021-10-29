@@ -30,7 +30,9 @@ public abstract class RoomGenerator {
     }
 
 
-    // Generate list String [] of room in a board
+    // Generate list String [] of room in a board ,
+    // use for Filter by room with a list of room to type String [] roomListItem ,
+    // use for unit test
     public static String[] ROOMS_LIST_STRING_TABLEAU = {
             "Salle 1",
             "Salle 2",

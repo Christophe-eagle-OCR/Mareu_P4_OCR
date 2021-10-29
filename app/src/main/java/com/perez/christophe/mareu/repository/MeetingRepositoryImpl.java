@@ -29,7 +29,7 @@ public class MeetingRepositoryImpl implements MeetingRepository {
     }
 
     @Override
-    public void createMeeting(Meeting meeting) {
+    public void addMeeting(Meeting meeting) {
         mMeetings.add(meeting);
 
     }

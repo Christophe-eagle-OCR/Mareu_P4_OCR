@@ -23,7 +23,6 @@ import com.perez.christophe.mareu.repository.MeetingRepository;
 import com.perez.christophe.mareu.repository.RoomGenerator;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -108,7 +107,7 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
 
 
         // Pour créer la reunion ( en recuperant dans RoomGenerator le nom de la salle et sa couleur associée suivant sa "position" choisie dans le spinner avec la methode onItemSelected)
-        mMeetingRepository.createMeeting(new Meeting(object, date, starTime, endTime, listOfParticipants, RoomGenerator.generateListOfRoons().get(position)));
+        mMeetingRepository.addMeeting(new Meeting(object, date, starTime, endTime, listOfParticipants, RoomGenerator.generateListOfRoons().get(position)));
         Toast.makeText(this, "Bravo , la réunion a été créée", Toast.LENGTH_SHORT).show();
         finish();
     }

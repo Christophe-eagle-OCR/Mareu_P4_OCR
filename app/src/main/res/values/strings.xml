@@ -4,9 +4,9 @@
     <string name="content_description_addMeeting">Ajouter une réunion</string>
     <string name="content_description_createMeeting">créer une réunion</string>
 
-    <!-- For Spinner - list of the rooms -->
+    <!-- For Spinner - list of the rooms  / not use -->
     <string-array name="list_of_meeting_rooms">
-        <item>Salle A</item>
+        <item>Salle 1</item>
         <item>Salle B</item>
         <item>Salle C</item>
         <item>Salle D</item>
