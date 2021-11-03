@@ -7,6 +7,7 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -27,6 +28,8 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -34,6 +37,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -77,12 +81,13 @@ public class MeetingListActivityTestAddMeeting {
         appCompatCheckedTextView.perform(click());
         //onView(allOf(withId(android.R.id.button1),isDisplayed())).perform(click());
 
-        ViewInteraction textInputEditText = onView(
-                childAtPosition(
-                        childAtPosition(
-                                withId(R.id.object_text_field),
-                                0),
-                        0));
+        ViewInteraction textInputEditText = onView(withId(R.id.object_text_field_edit_text));
+     //   ViewInteraction textInputEditText = onView(
+     //           childAtPosition(
+     //                   childAtPosition(
+     //                           withId(R.id.object_text_field),
+     //                           0),
+     //                   0));
         textInputEditText.perform(scrollTo(), replaceText("Reunion 1"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
@@ -130,19 +135,21 @@ public class MeetingListActivityTestAddMeeting {
                                 1)));
         materialAutoCompleteTextView.perform(scrollTo(), click());
 
-        DataInteraction materialTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(0);
+        DataInteraction materialTextView = onData(equalTo("30 minutes")).inRoot(RootMatchers.isPlatformPopup());
+      //  DataInteraction materialTextView = onData(anything())
+      //          .inAdapterView(childAtPosition(
+      //                  withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+      //                  0))
+      //          .atPosition(0);
         materialTextView.perform(click());
 
-        ViewInteraction textInputEditText2 = onView(
-                childAtPosition(
-                        childAtPosition(
-                                withId(R.id.list_of_participants_text_field),
-                                0),
-                        0));
+        ViewInteraction textInputEditText2 = onView(withId(R.id.list_of_participants_text_field_edit_text));
+     //  ViewInteraction textInputEditText2 = onView(
+     //          childAtPosition(
+     //                  childAtPosition(
+     //                          withId(R.id.list_of_participants_text_field),
+     //                          0),
+     //                  0));
         textInputEditText2.perform(scrollTo(), replaceText("toto@gmail,.com"), closeSoftKeyboard());
 
         ViewInteraction extendedFloatingActionButton = onView(
@@ -154,10 +161,18 @@ public class MeetingListActivityTestAddMeeting {
                                 9)));
         extendedFloatingActionButton.perform(scrollTo(), click());
 
-        // TODO : add by christophe le 29/10/2021
         // Should be display screen " Ma réu" (main screen)
         onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
-        // todo onView(withId(R.id.main_content_list_meetings)).check()
+
+        // Should be display screen : count 1 item_rv in main
+        onView(withId(R.id.list_meeting_rv)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(1)));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasMinimumChildCount(1)));
+
+        // Should deleted 1 item
+        onView(withId(R.id.item_meeting_delete_room_button)).perform(click());
+        onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(0)));
 
     }
 

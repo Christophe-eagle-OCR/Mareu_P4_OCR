@@ -4,18 +4,19 @@
     <string name="content_description_addMeeting">Ajouter une réunion</string>
     <string name="content_description_createMeeting">créer une réunion</string>
 
-    <!-- For Spinner - list of the rooms  / not use -->
+    <!-- For Spinner , in screen create a new meeting - list of the rooms  / not use -->
+    <!-- For unit test - list of the rooms  / use -->
     <string-array name="list_of_meeting_rooms">
         <item>Salle 1</item>
-        <item>Salle B</item>
-        <item>Salle C</item>
-        <item>Salle D</item>
-        <item>Salle E</item>
-        <item>Salle F</item>
-        <item>Salle G</item>
-        <item>Salle H</item>
-        <item>Salle I</item>
-        <item>Salle J</item>
+        <item>Salle 2</item>
+        <item>Salle 3</item>
+        <item>Salle 4</item>
+        <item>Salle 5</item>
+        <item>Salle 6</item>
+        <item>Salle 7</item>
+        <item>Salle 8</item>
+        <item>Salle 9</item>
+        <item>Salle 10</item>
     </string-array>
 
 

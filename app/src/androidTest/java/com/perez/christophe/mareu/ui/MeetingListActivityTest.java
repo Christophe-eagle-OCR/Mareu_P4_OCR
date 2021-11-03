@@ -7,16 +7,21 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.anything;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -52,13 +57,18 @@ public class MeetingListActivityTest {
      */
     @Test
     public void meetingList_shouldBeEmpty() {
-        //onView(Matchers.allOf(ViewMatchers.withId(R.id.main_content_list_meetings), isDisplayed())).check(matches(hasMinimumChildCount(0)));
-        //onView(Matchers.allOf(ViewMatchers.withId(R.id.main_content_list_meetings), isDisplayed())).check(matches(hasChildCount(0)));
-        // OK onView(ViewMatchers.withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
+        // onView(ViewMatchers.withId(R.id.main_content_list_meetings)).check(matches(isDisplayed())); // OK
         onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(0)));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasMinimumChildCount(0)));
     }
 
-   @Test
+
+    /**
+     * On start app, click on button +
+     * We ensure that the screen to create meeting is displayed
+     */
+    @Test
    public void meetingList_onSelectAddButton_shoudlViewNewMeeting() {
        onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
        onView(withId(R.id.add_meeting_fab)).perform(click());

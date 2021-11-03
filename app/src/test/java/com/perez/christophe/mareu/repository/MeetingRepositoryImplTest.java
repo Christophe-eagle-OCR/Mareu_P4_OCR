@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Christophe on 21/10/2021.
- * <p>
+ *
  * Unit test on Meeting repository
  */
 
@@ -61,7 +61,7 @@ public class MeetingRepositoryImplTest {
 
     /**
      * create and Add a meeting then check if List of meeting contains it.
-     * Should be with meetings
+     * Should be with 2 meetings
      */
     @Test
     public void addMeetingWithSuccess() {
@@ -110,7 +110,7 @@ public class MeetingRepositoryImplTest {
 
 
     /**
-     * Filter list by date, and return array of meetings.
+     * Filter list by date, and return array of meetings (nb2).
      * then check if size list is equals and the meeting have correct date
      */
     @Test
@@ -147,17 +147,18 @@ public class MeetingRepositoryImplTest {
     }
 
     /**
-     * Filter list by room
+     * Filter list by room, and return array of meetings (nb2).
+     * then check if size list is equals and the meeting have correct room
      */
     @Test
     public void getMeetingFilteredByRoomWithSuccess() {
         // Given
-        //String filterRoonString = RoomGenerator.ROOMS_LIST_STRING_TABLEAU[0];  // OK
+        //String filterRoonString = RoomGenerator.ROOMS_LIST_STRING_TABLEAU[0];  // OK , [0] is Salle 1
         //String filterRoonString = "Salle 1";  // OK
-        //String filterRoonString = RoomGenerator.ROOMS_LIST.get(0).getNameOfRoom();  // OK
+        //String filterRoonString = RoomGenerator.ROOMS_LIST.get(0).getNameOfRoom();  // OK , get(0).getNameOfRoom() is Salle 1
 
         Context context = ApplicationProvider.getApplicationContext();
-        String filterRoonString = context.getResources().getStringArray(R.array.list_of_meeting_rooms)[0]; // OK
+        String filterRoonString = context.getResources().getStringArray(R.array.list_of_meeting_rooms)[0]; // OK , [0] is Salle 1
 
 
         Meeting testMeeting1 = new Meeting("Reunion 1", "jeudi 21 octobre 2021", "16h10", "15 minutes", "toto@gmail.com", RoomGenerator.ROOMS_LIST.get(0));
