@@ -41,43 +41,46 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by Christophe on 28/10/2021.
+ * Created by Christophe on 03/11/2021.
  */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MeetingListActivityTestAddMeeting {
+public class MeetingListActivityTestDeleteMeeting {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
 
     @Test
-    public void meetingListActivityTest_addMeeting() {
+    public void meetingListActivityTest_deleteMeeting() {
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.add_meeting_fab), withContentDescription("Ajouter une réunion"),
-                        childAtPosition(
-                                allOf(withId(R.id.main_content_list_meetings),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
-                                0),
+      //                  childAtPosition(
+      //                          allOf(withId(R.id.main_content_list_meetings),
+      //                                  childAtPosition(
+      //                                          withId(android.R.id.content),
+      //                                          0)),
+      //                          0),
                         isDisplayed()));
         floatingActionButton.perform(click());
 
         ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.spinner_list_of_rooms),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.new_meeting),
-                                        0),
-                                8)));
+                allOf(withId(R.id.spinner_list_of_rooms),isDisplayed()));
+      //          allOf(withId(R.id.spinner_list_of_rooms),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withId(R.id.new_meeting),
+      //                                  0),
+      //                          8)));
         appCompatSpinner.perform(scrollTo(), click());
 
-        DataInteraction appCompatCheckedTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(0);
+
+        DataInteraction appCompatCheckedTextView = onData(anything()).atPosition(0);
+      //  DataInteraction appCompatCheckedTextView = onData(anything())
+      //          .inAdapterView(childAtPosition(
+      //                  withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+      //                  0))
+      //          .atPosition(0);
         appCompatCheckedTextView.perform(click());
 
         ViewInteraction textInputEditText = onView(withId(R.id.object_text_field_edit_text));
@@ -90,48 +93,53 @@ public class MeetingListActivityTestAddMeeting {
         textInputEditText.perform(scrollTo(), replaceText("Reunion 1"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
-                allOf(withId(R.id.select_date_button), withText("select date"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.new_meeting),
-                                        0),
-                                6)));
+                allOf(withId(R.id.select_date_button), withText("select date")));
+      //          allOf(withId(R.id.select_date_button), withText("select date"),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withId(R.id.new_meeting),
+      //                                  0),
+      //                          6)));
         materialButton.perform(scrollTo(), click());
 
         ViewInteraction materialButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
+                allOf(withId(android.R.id.button1), withText("OK")));
+      //          allOf(withId(android.R.id.button1), withText("OK"),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withClassName(is("android.widget.ScrollView")),
+      //                                  0),
+      //                          3)));
         materialButton2.perform(scrollTo(), click());
 
         ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.select_time_button), withText("select time"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.new_meeting),
-                                        0),
-                                7)));
+                allOf(withId(R.id.select_time_button), withText("select time")));
+      //          allOf(withId(R.id.select_time_button), withText("select time"),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withId(R.id.new_meeting),
+      //                                  0),
+      //                          7)));
         materialButton3.perform(scrollTo(), click());
 
         ViewInteraction materialButton4 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
+                allOf(withId(android.R.id.button1), withText("OK")));
+      //          allOf(withId(android.R.id.button1), withText("OK"),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withClassName(is("android.widget.ScrollView")),
+      //                                  0),
+      //                          3)));
         materialButton4.perform(scrollTo(), click());
 
         ViewInteraction materialAutoCompleteTextView = onView(
-                allOf(withId(R.id.end_time2_text_field),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.end_time_text_field),
-                                        0),
-                                1)));
+                allOf(withId(R.id.end_time2_text_field)));
+      //         allOf(withId(R.id.end_time2_text_field),
+      //                 childAtPosition(
+      //                         childAtPosition(
+      //                                 withId(R.id.end_time_text_field),
+      //                                 0),
+      //                         1)));
         materialAutoCompleteTextView.perform(scrollTo(), click());
 
         DataInteraction materialTextView = onData(equalTo("30 minutes")).inRoot(RootMatchers.isPlatformPopup());
@@ -152,12 +160,13 @@ public class MeetingListActivityTestAddMeeting {
         textInputEditText2.perform(scrollTo(), replaceText("toto@gmail,.com"), closeSoftKeyboard());
 
         ViewInteraction extendedFloatingActionButton = onView(
-                allOf(withId(R.id.create_meeting_fab), withText("Créer la reunion"), withContentDescription("créer une réunion"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.new_meeting),
-                                        0),
-                                9)));
+                allOf(withId(R.id.create_meeting_fab), withText("Créer la reunion"), withContentDescription("créer une réunion")));
+      //          allOf(withId(R.id.create_meeting_fab), withText("Créer la reunion"), withContentDescription("créer une réunion"),
+      //                  childAtPosition(
+      //                          childAtPosition(
+      //                                  withId(R.id.new_meeting),
+      //                                  0),
+      //                          9)));
         extendedFloatingActionButton.perform(scrollTo(), click());
 
         // Should be display screen " Ma réu" (main screen)
@@ -167,6 +176,11 @@ public class MeetingListActivityTestAddMeeting {
         onView(withId(R.id.list_meeting_rv)).check(matches(isDisplayed()));
         onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(1)));
         onView(withId(R.id.list_meeting_rv)).check(matches(hasMinimumChildCount(1)));
+
+        // Should deleted 1 item : use delete button
+        onView(withId(R.id.item_meeting_delete_room_button)).perform(click());
+        onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(0)));
 
     }
 
