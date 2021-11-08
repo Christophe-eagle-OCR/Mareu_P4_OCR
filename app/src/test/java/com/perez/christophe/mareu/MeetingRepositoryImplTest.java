@@ -1,4 +1,4 @@
-package com.perez.christophe.mareu.repository;
+package com.perez.christophe.mareu;
 
 
 import android.content.Context;
@@ -9,6 +9,8 @@ import androidx.test.core.app.ApplicationProvider;
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.di.DI;
 import com.perez.christophe.mareu.model.Meeting;
+import com.perez.christophe.mareu.repository.MeetingRepository;
+import com.perez.christophe.mareu.repository.RoomGenerator;
 
 import org.junit.Before;
 import org.junit.Test;

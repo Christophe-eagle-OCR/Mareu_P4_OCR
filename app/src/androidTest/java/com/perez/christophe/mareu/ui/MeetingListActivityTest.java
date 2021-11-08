@@ -1,27 +1,21 @@
 package com.perez.christophe.mareu.ui;
 
 import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.matcher.ViewMatchers;
 
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.anything;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -69,12 +63,11 @@ public class MeetingListActivityTest {
      * We ensure that the screen to create meeting is displayed
      */
     @Test
-   public void meetingList_onSelectAddButton_shoudlViewNewMeeting() {
-       onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
-       onView(withId(R.id.add_meeting_fab)).perform(click());
-       onView(withId(R.id.new_meeting)).check(matches(isDisplayed()));
-   }
-
+    public void meetingList_onSelectAddButton_shouldDisplayNewMeeting() {
+        onView(withId(R.id.main_content_list_meetings)).check(matches(isDisplayed()));
+        onView(withId(R.id.add_meeting_fab)).perform(click());
+        onView(withId(R.id.new_meeting)).check(matches(isDisplayed()));
+    }
 
 
 }
