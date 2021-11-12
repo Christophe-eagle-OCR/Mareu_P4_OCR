@@ -46,20 +46,20 @@ public class MeetingListActivityTestDeleteMeeting {
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
 
-    @Before
-    public void setup(){
-        //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
-        mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mActivityTestRule.getActivity().emptyMeetingList();
-            }
-        });
-    }
+  //  @Before
+  //  public void setup(){
+  //      //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
+  //      mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
+  //          @Override
+  //          public void run() {
+  //              mActivityTestRule.getActivity().emptyMeetingList();
+  //          }
+  //      });
+  //  }
 
-    @After
-    public void TearDown(){
-    }
+  //  @After
+  //  public void TearDown(){
+  //  }
 
     @Test
     public void meetingListActivityTest_deleteMeeting() {

@@ -209,11 +209,12 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.listMeetingRv.getAdapter().notifyDataSetChanged();
     }
 
-    // For Clear all (for nothing item Meeting) for each test instrumentalised
-    @VisibleForTesting
-    public void emptyMeetingList() {
-        mMeetingRepository.getMeetings().clear();
-        initData();
-        mMeetingAdapter.notifyDataSetChanged();
-    }
+ //  // For Clear all (for nothing item Meeting) for each test instrumentalised
+ //  @VisibleForTesting
+ //  public void emptyMeetingList() {
+ //      mMeetingRepository.getMeetings().clear();
+ //      initData();
+ //      mMeetingAdapter.notifyDataSetChanged();
+ //  }
+
 }
