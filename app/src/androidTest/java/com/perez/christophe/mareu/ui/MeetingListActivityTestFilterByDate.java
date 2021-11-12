@@ -6,6 +6,7 @@ import android.widget.DatePicker;
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -16,6 +17,8 @@ import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 import com.perez.christophe.mareu.utils.RecyclerViewUtils;
 
 import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +38,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.perez.christophe.mareu.utils.RecyclerViewUtils.clickChildView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
@@ -50,6 +54,21 @@ public class MeetingListActivityTestFilterByDate {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
+
+    @Before
+    public void setup(){
+        //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
+        mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivityTestRule.getActivity().emptyMeetingList();
+            }
+        });
+    }
+
+    @After
+    public void TearDown(){
+    }
 
     @Test
     public void meetingListActivityTestFilterByDate() {

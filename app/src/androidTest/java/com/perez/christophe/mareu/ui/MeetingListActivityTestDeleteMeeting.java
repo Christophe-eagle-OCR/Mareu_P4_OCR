@@ -11,6 +11,8 @@ import androidx.test.runner.AndroidJUnit4;
 import com.perez.christophe.mareu.R;
 import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +45,21 @@ public class MeetingListActivityTestDeleteMeeting {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
+
+    @Before
+    public void setup(){
+        //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
+        mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivityTestRule.getActivity().emptyMeetingList();
+            }
+        });
+    }
+
+    @After
+    public void TearDown(){
+    }
 
     @Test
     public void meetingListActivityTest_deleteMeeting() {

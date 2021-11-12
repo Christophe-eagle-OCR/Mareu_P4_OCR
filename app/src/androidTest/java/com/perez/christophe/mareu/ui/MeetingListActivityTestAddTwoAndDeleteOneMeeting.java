@@ -13,12 +13,21 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.perez.christophe.mareu.R;
+import com.perez.christophe.mareu.di.DI;
+import com.perez.christophe.mareu.model.Meeting;
+import com.perez.christophe.mareu.repository.MeetingRepository;
+import com.perez.christophe.mareu.repository.MeetingRepositoryImpl;
 import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 import com.perez.christophe.mareu.utils.RecyclerViewUtils;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -27,6 +36,7 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
@@ -38,6 +48,8 @@ import static com.perez.christophe.mareu.utils.RecyclerViewUtils.clickChildView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 /**
  * Created by Christophe on 03/11/2021.
@@ -50,6 +62,21 @@ public class MeetingListActivityTestAddTwoAndDeleteOneMeeting {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
+
+    @Before
+    public void setup(){
+        //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
+        mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivityTestRule.getActivity().emptyMeetingList();
+            }
+        });
+    }
+
+    @After
+    public void TearDown(){
+    }
 
     @Test
     public void meetingListActivityTest_addTwoMeetingAndDeleteOne() {

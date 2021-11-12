@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -206,5 +207,13 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         // mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByDate(c.getTime()));
         mMeetingList.addAll(mMeetingRepository.getMeetingFilteredByDate(filterDateString));
         binding.listMeetingRv.getAdapter().notifyDataSetChanged();
+    }
+
+    // For Clear all (for nothing item Meeting) for each test instrumentalised
+    @VisibleForTesting
+    public void emptyMeetingList() {
+        mMeetingRepository.getMeetings().clear();
+        initData();
+        mMeetingAdapter.notifyDataSetChanged();
     }
 }

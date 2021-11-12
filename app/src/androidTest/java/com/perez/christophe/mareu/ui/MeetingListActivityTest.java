@@ -44,7 +44,6 @@ public class MeetingListActivityTest {
         assertTrue(true);
     }
 
-
     /**
      * On start app
      * We ensure that our recyclerview is displayed without item
@@ -57,7 +56,6 @@ public class MeetingListActivityTest {
         onView(withId(R.id.list_meeting_rv)).check(matches(hasMinimumChildCount(0)));
     }
 
-
     /**
      * On start app, click on button +
      * We ensure that the screen to create meeting is displayed
@@ -68,6 +66,4 @@ public class MeetingListActivityTest {
         onView(withId(R.id.add_meeting_fab)).perform(click());
         onView(withId(R.id.new_meeting)).check(matches(isDisplayed()));
     }
-
-
 }

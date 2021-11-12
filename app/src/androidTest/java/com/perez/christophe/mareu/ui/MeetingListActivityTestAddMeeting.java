@@ -7,18 +7,23 @@ import android.view.ViewParent;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.perez.christophe.mareu.R;
+import com.perez.christophe.mareu.di.DI;
+import com.perez.christophe.mareu.repository.MeetingRepository;
 import com.perez.christophe.mareu.ui.meeting_list.MeetingListActivity;
 import com.perez.christophe.mareu.utils.RecyclerViewUtils;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +41,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.perez.christophe.mareu.utils.RecyclerViewUtils.clickChildView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.equalTo;
@@ -52,6 +58,21 @@ public class MeetingListActivityTestAddMeeting {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
+
+    @Before
+    public void setup(){
+        //activityScenarioRule.getScenario().onActivity(MeetingListActivity::emptyMeetingList); // OK , if use ActivityScenario
+        mActivityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivityTestRule.getActivity().emptyMeetingList();
+            }
+        });
+    }
+
+    @After
+    public void TearDown(){
+    }
 
     @Test
     public void meetingListActivityTest_addMeeting() {
@@ -169,7 +190,6 @@ public class MeetingListActivityTestAddMeeting {
         onView(withId(R.id.list_meeting_rv)).check(matches(isDisplayed()));
         onView(withId(R.id.list_meeting_rv)).check(matches(hasChildCount(1)));
         onView(withId(R.id.list_meeting_rv)).check(new RecyclerViewUtils.ItemCount(1));
-
     }
 
     private static Matcher<View> childAtPosition(
