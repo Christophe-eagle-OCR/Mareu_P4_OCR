@@ -97,13 +97,14 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
             return;
         }
 
-        //todo : Pb du type de variable pour la date , la list des participants, et la room !!
+        // Info  : au debut de l'appli  >>> Pb sur le choix du type de variable pour la date , la list des participants, et la room !!
         // actuellement j'ai mis la date  en "String" et la list des participants en "String",
         // fait UN "SPINNER" menu deroulant  pour la liste des rooms
-        // fait : POUR LA DATE , on peut faire un "DatePicker"
-        // fait : Pour l'heure , on peut faire un "TimePicker"
+        // fait : pour la date , un "DatePicker"
+        // fait : pour l'heure , un "TimePicker"
         // fait : pour la durée de la reunion , fait un spinner (on peut faire aussi un TimePicker )
-        //pour la liste des participants : edit texte ou spinner et 1 btn plus, ou chips ?
+        // fait : pour la liste des participants : edit texte ( on peut faire aussi un spinner et 1 btn plus, ou chips)
+        // fait : pour l'objet de la reunion  : edit texte
 
 
         // Pour créer la reunion ( en recuperant dans RoomGenerator le nom de la salle et sa couleur associée suivant sa "position" choisie dans le spinner avec la methode onItemSelected)
@@ -142,7 +143,7 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
 
-        //Todo : supprimer les lignes ci-dessous
+        //other way to do :
         //Get text from selected item's position & set it to TextView
         //String room = binding.addMeetingRoomTextField.getEditText().setText(parent.getItemAtPosition(position).toString());
         //room.setText(parent.getItemAtPosition(position).toString());
@@ -219,9 +220,11 @@ public class NewMeetingActivity extends AppCompatActivity implements TimePickerD
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // An item was selected. You can retrieve the selected item using
+
                 String text = parent.getItemAtPosition(position).toString();
                 Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-                //todo : le Toast ne s'affiche pas , pourquoi ?
+                // Pour info  : le Toast ne s'affiche pas , pourquoi ?
+                // attention on est dans un autoCompleteTextView pour endTime2TextField
             }
 
             @Override
